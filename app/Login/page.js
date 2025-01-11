@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { MdOutlineArrowRight } from "react-icons/md";
 import { useSession, signIn } from "next-auth/react"
@@ -7,11 +7,13 @@ import { useRouter } from 'next/navigation';
 
 const Login = () => {
     const { data: session } = useSession()
+    const router = useRouter()
     
-    if (session) {
-        const router = useRouter()
-        router.push('/')
-    }
+    useEffect(() => {
+        if (session) {
+          router.push('/');
+        }
+      }, [session, router]);
     
     return (
         <>
